@@ -1,17 +1,12 @@
 <template>
     <section class="recipes">
         <Recipe
-          thumbnail="https://assets3.thrillist.com/v1/image/2797371/size/tmg-article_default_mobile.jpg"
-          title="Burger Lezat"
-          priviewText="Sangat lezat!"
-          id="1"
-        />
-
-        <Recipe
-          thumbnail="https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/veggie_paella_29921_16x9.jpg"
-          title="Nasi Kuning"
-          priviewText="Mantap jiwa!"
-          id="2"
+          v-for="recipe in recipes"
+          :key="recipe.id"
+          :thumbnail="recipe.thumbnail"
+          :title="recipe.title"
+          :priviewText="recipe.priviewText"
+          :id="recipe.id"
         />
     </section>
 </template>
@@ -22,6 +17,29 @@
   export default {
       components: {
           Recipe
+      },
+
+      asyncData() {
+          return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                  resolve({
+                      recipes: [
+                          {
+                              id: "1",
+                              title: "Burger Lezat",
+                              priviewText: "Sangat lezat!",
+                              thumbnail: "https://assets3.thrillist.com/v1/image/2797371/size/tmg-article_default_mobile.jpg"
+                          },
+                          {
+                              id: "2",
+                              title: "Nasi Kuning",
+                              priviewText: "Mantap jiwa!",
+                              thumbnail: "https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/veggie_paella_29921_16x9.jpg"
+                          }
+                      ]
+                  })
+              }, 1500)
+          })
       }
   }
 </script>
